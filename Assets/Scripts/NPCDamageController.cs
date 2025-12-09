@@ -314,7 +314,7 @@ namespace NPCAISystem
             }
 
             // Aggression scaling (for non-weak NPCs)
-            if (useAggressionScaling && !npcController.isWeakNPC)
+            if (useAggressionScaling && npcController != null && !npcController.isWeakNPC)
             {
                 baseProbability += aggressionDamageBonus;
             }

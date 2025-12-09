@@ -51,6 +51,7 @@ namespace NPCAISystem
         private Vector3 startPosition;
         private bool isDead = false;
         private Renderer playerRenderer;
+        private Material playerMaterial;  // Cached material reference
         private Color originalColor;
         private bool isShowingDamageFeedback = false;
         private float damageFeedbackStartTime;
@@ -60,11 +61,13 @@ namespace NPCAISystem
             currentHealth = maxHealth;
             startPosition = transform.position;
 
-            // Get renderer for damage feedback
+            // Get renderer for damage feedback and cache material
             playerRenderer = GetComponent<Renderer>();
             if (playerRenderer != null)
             {
-                originalColor = playerRenderer.material.color;
+                // Create a unique material instance for this player
+                playerMaterial = playerRenderer.material;
+                originalColor = playerMaterial.color;
             }
         }
 
@@ -85,9 +88,9 @@ namespace NPCAISystem
                 if (Time.time - damageFeedbackStartTime >= damageFeedbackDuration)
                 {
                     // Reset color
-                    if (playerRenderer != null)
+                    if (playerMaterial != null)
                     {
-                        playerRenderer.material.color = originalColor;
+                        playerMaterial.color = originalColor;
                     }
                     isShowingDamageFeedback = false;
                 }
@@ -112,9 +115,9 @@ namespace NPCAISystem
             Debug.Log($"Player took {damage:F1} damage. Health: {currentHealth:F1}/{maxHealth:F1}");
 
             // Visual feedback
-            if (enableDamageFeedback && playerRenderer != null)
+            if (enableDamageFeedback && playerMaterial != null)
             {
-                playerRenderer.material.color = damageColor;
+                playerMaterial.color = damageColor;
                 isShowingDamageFeedback = true;
                 damageFeedbackStartTime = Time.time;
             }
@@ -178,9 +181,9 @@ namespace NPCAISystem
             }
 
             // Reset visual state
-            if (playerRenderer != null)
+            if (playerMaterial != null)
             {
-                playerRenderer.material.color = originalColor;
+                playerMaterial.color = originalColor;
             }
 
             Debug.Log("Player respawned!");

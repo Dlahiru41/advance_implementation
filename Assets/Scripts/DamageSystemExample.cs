@@ -1,23 +1,24 @@
 using UnityEngine;
-using NPCAISystem;
 
-/// <summary>
-/// Example script showing how to set up and customize the probability-controlled damage system.
-/// Attach this to an NPC or use the code as a reference.
-/// </summary>
-public class DamageSystemExample : MonoBehaviour
+namespace NPCAISystem
 {
-    [Header("Example Configuration")]
-    [Tooltip("Select which example setup to use")]
-    public ExampleType exampleType = ExampleType.SymmetricBalanced;
-
-    public enum ExampleType
+    /// <summary>
+    /// Example script showing how to set up and customize the probability-controlled damage system.
+    /// Attach this to an NPC or use the code as a reference.
+    /// </summary>
+    public class DamageSystemExample : MonoBehaviour
     {
-        SymmetricBalanced,      // Fair combat for normal enemies
-        AsymmetricUnpredictable, // Exciting boss with damage spikes
-        DynamicAdaptive,        // Intelligent enemy that adapts
-        CustomConfiguration     // Manual configuration in inspector
-    }
+        [Header("Example Configuration")]
+        [Tooltip("Select which example setup to use")]
+        public ExampleType exampleType = ExampleType.SymmetricBalanced;
+
+        public enum ExampleType
+        {
+            SymmetricBalanced,      // Fair combat for normal enemies
+            AsymmetricUnpredictable, // Exciting boss with damage spikes
+            DynamicAdaptive,        // Intelligent enemy that adapts
+            CustomConfiguration     // Manual configuration in inspector
+        }
 
     void Start()
     {
