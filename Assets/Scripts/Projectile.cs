@@ -76,6 +76,13 @@ namespace NPCAISystem
             owner = shooter;
             isPlayerProjectile = fromPlayer;
 
+            // Validate direction
+            if (direction.sqrMagnitude < 0.001f)
+            {
+                Debug.LogWarning("Projectile: Invalid direction vector (zero or near-zero). Using forward fallback.");
+                direction = shooter != null ? shooter.transform.forward : Vector3.forward;
+            }
+
             // Setup rigidbody
             rb = GetComponent<Rigidbody>();
             if (rb != null)
@@ -91,7 +98,10 @@ namespace NPCAISystem
                 trail.time = trailTime;
                 trail.startWidth = trailWidth;
                 trail.endWidth = 0.01f;
-                trail.material = new Material(Shader.Find("Sprites/Default"));
+                
+                // Use shared material to avoid allocations
+                Material trailMaterial = new Material(Shader.Find("Sprites/Default"));
+                trail.sharedMaterial = trailMaterial;
                 trail.startColor = trailColor;
                 trail.endColor = new Color(trailColor.r, trailColor.g, trailColor.b, 0f);
             }

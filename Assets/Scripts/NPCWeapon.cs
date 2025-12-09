@@ -133,8 +133,8 @@ namespace NPCAISystem
             if (npcController.currentState != NPCState.Chase)
                 return;
 
-            // Check if can fire
-            if (Time.time - lastFireTime < 1f / fireRate)
+            // Check if can fire (prevent division by zero)
+            if (fireRate <= 0f || Time.time - lastFireTime < 1f / fireRate)
                 return;
 
             // Check if player is in firing range
@@ -292,6 +292,8 @@ namespace NPCAISystem
         /// </summary>
         private void CreateDefaultProjectile()
         {
+            Debug.LogWarning($"NPCWeapon on {gameObject.name}: Creating default projectile at runtime. For production, assign a projectile prefab in Inspector.");
+            
             projectilePrefab = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             projectilePrefab.name = "NPCDefaultProjectile";
             projectilePrefab.transform.localScale = Vector3.one * 0.2f;

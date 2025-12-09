@@ -122,8 +122,8 @@ namespace NPCAISystem
         /// </summary>
         private void TryFire()
         {
-            // Check fire rate
-            if (Time.time - lastFireTime < 1f / fireRate)
+            // Check fire rate (prevent division by zero)
+            if (fireRate <= 0f || Time.time - lastFireTime < 1f / fireRate)
                 return;
 
             // Determine fire direction
@@ -179,12 +179,19 @@ namespace NPCAISystem
             // Raycast to check for obstacles
             if (Physics.Raycast(spawnPos, direction, out RaycastHit hit, maxRange, obstacleLayerMask))
             {
-                // Check if we hit an obstacle before reaching max range
-                float hitDistance = Vector3.Distance(spawnPos, hit.point);
+                // Use layer-based detection first for better performance
+                int hitLayer = hit.collider.gameObject.layer;
                 
-                // Allow shooting if we hit something within range (NPC or player)
-                if (hit.collider.GetComponent<NPCController>() != null || 
-                    hit.collider.CompareTag("Player"))
+                // Allow shooting if we hit a valid target
+                // Layer 8 = Player, Layer 9 = NPC (adjust as needed for your project)
+                if (hitLayer == 8 || hitLayer == 9)
+                {
+                    return true;
+                }
+                
+                // Fallback to tag/component check if layers not set
+                if (hit.collider.CompareTag("Player") || 
+                    hit.collider.GetComponent<NPCController>() != null)
                 {
                     return true;
                 }
@@ -263,6 +270,8 @@ namespace NPCAISystem
         /// </summary>
         private void CreateDefaultProjectile()
         {
+            Debug.LogWarning("PlayerWeapon: Creating default projectile at runtime. For production, assign a projectile prefab in Inspector.");
+            
             projectilePrefab = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             projectilePrefab.name = "DefaultProjectile";
             projectilePrefab.transform.localScale = Vector3.one * 0.2f;
