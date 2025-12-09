@@ -1,8 +1,18 @@
 # Terrain Tutorial - Visual Enhancements & NPC AI
 
-This Unity project demonstrates procedural terrain generation with beautiful visual enhancements including textures, enhanced artifacts, improved player appearance, and an advanced NPC AI system with autonomous behavior.
+This Unity project demonstrates procedural terrain generation with beautiful visual enhancements including textures, enhanced artifacts, improved player appearance, an advanced NPC AI system with autonomous behavior, and a Clash of Clans-style RTS camera.
 
 ## Features
+
+### 📹 RTS Camera System (NEW!)
+- **Free-Moving Camera**: Clash of Clans-style strategic camera
+- **Top-Down/Isometric View**: Perfect 45° angle for strategy gameplay
+- **Pan, Zoom, Rotate**: Full camera control with WASD/arrows, mouse wheel, Q/E
+- **Edge Panning**: Move mouse to screen edges for smooth panning
+- **Boundary Constraints**: Camera stays within terrain boundaries
+- **Smooth Movement**: Polished camera interpolation
+- **Never Follows Player**: True RTS experience with full map visibility
+- See `RTS_CAMERA_GUIDE.md` for complete documentation
 
 ### 🤖 Advanced NPC AI System (NEW!)
 - **Finite State Machine**: Idle, Patrol, Chase, Search, and Flee behaviors
@@ -121,15 +131,24 @@ Edit `PlayerVisualEnhancer` component:
 
 ## Controls
 
+### Camera Controls (RTS Mode)
+- **WASD / Arrow Keys**: Pan camera
+- **Mouse Wheel**: Zoom in/out
+- **Q/E Keys**: Rotate camera
+- **Middle Mouse**: Hold and drag to rotate
+- **Mouse at screen edges**: Pan camera (edge panning)
+- **H key**: Show/hide camera controls help
+
+### Gameplay Controls
 - **R key**: Regenerate terrain (in play mode)
 - **P key**: Toggle artifact path visualization on/off
 - **N key**: Emit alert sound to notify NPCs (in NPC demo)
-- **H key**: Show NPC AI help and controls (in NPC demo)
 - **Fire1 button** (left mouse): Alternate terrain edit (legacy mode)
 
 ## Documentation
 
 For detailed information, see:
+- `RTS_CAMERA_GUIDE.md` - **NEW!** Complete guide to RTS camera system with controls and configuration
 - `NPC_AI_SYSTEM_GUIDE.md` - **NEW!** Complete guide to NPC AI system with FSM, sensing, and formations
 - `PHASE_3_4_IMPLEMENTATION.md` - **NEW!** Complete implementation details for Phase 3 & 4
 - `ARTIFACT_SYSTEM_GUIDE.md` - **NEW!** Comprehensive artifact system user guide
