@@ -56,6 +56,22 @@ namespace NPCAISystem
         [Tooltip("Hearing range for NPCs")]
         public float hearingRange = 20f;
 
+        [Header("Damage System Configuration")]
+        [Tooltip("Enable damage system for spawned NPCs")]
+        public bool enableDamageSystem = true;
+
+        [Tooltip("Damage model for combat NPCs")]
+        public NPCDamageController.DamageModel combatNPCDamageModel = NPCDamageController.DamageModel.Symmetric;
+
+        [Tooltip("Archetype for combat NPCs")]
+        public NPCDamageController.NPCArchetype combatNPCArchetype = NPCDamageController.NPCArchetype.Normal;
+
+        [Tooltip("Damage model for weak NPCs")]
+        public NPCDamageController.DamageModel weakNPCDamageModel = NPCDamageController.DamageModel.Symmetric;
+
+        [Tooltip("Archetype for weak NPCs")]
+        public NPCDamageController.NPCArchetype weakNPCArchetype = NPCDamageController.NPCArchetype.WeakGrunt;
+
         [Header("References")]
         [Tooltip("Terrain reference for height sampling")]
         public Terrain terrain;
@@ -179,6 +195,24 @@ namespace NPCAISystem
             // Add NPCController
             NPCController controller = npcObj.AddComponent<NPCController>();
             controller.isWeakNPC = isWeak;
+
+            // Add NPCDamageController if enabled
+            if (enableDamageSystem)
+            {
+                NPCDamageController damageController = npcObj.AddComponent<NPCDamageController>();
+                
+                // Configure damage controller based on NPC type
+                if (isWeak)
+                {
+                    damageController.damageModel = weakNPCDamageModel;
+                    damageController.archetype = weakNPCArchetype;
+                }
+                else
+                {
+                    damageController.damageModel = combatNPCDamageModel;
+                    damageController.archetype = combatNPCArchetype;
+                }
+            }
 
             // Assign to group if groups are enabled
             if (useGroups && createdGroups.Count > 0)

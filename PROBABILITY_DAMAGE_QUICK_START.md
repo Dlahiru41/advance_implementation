@@ -46,6 +46,49 @@
 
 ---
 
+## 🔥 Automatic Setup with NPCSpawner (NEW!)
+
+### For Dynamically Spawned NPCs (Recommended)
+
+If you're using **NPCSpawner** to spawn NPCs at runtime, the damage system is **automatically attached**! No manual setup needed.
+
+```
+1. Select NPCSpawner GameObject in the Hierarchy
+2. In Inspector, find "Damage System Configuration"
+3. Ensure "Enable Damage System" is checked (default: enabled)
+4. Configure damage settings for combat and weak NPCs
+5. Done! All spawned NPCs will have damage system
+```
+
+**Configuration Options:**
+- **Enable Damage System**: Toggle damage system on/off for spawned NPCs
+- **Combat NPC Damage Model**: Damage model for aggressive NPCs (default: Symmetric)
+- **Combat NPC Archetype**: Archetype for combat NPCs (default: Normal)
+- **Weak NPC Damage Model**: Damage model for fleeing NPCs (default: Symmetric)
+- **Weak NPC Archetype**: Archetype for weak NPCs (default: Weak Grunt)
+
+**Benefits:**
+- ✅ Zero manual configuration required
+- ✅ Consistent damage settings across all NPCs
+- ✅ Different settings for weak vs combat NPCs
+- ✅ Works seamlessly with existing spawner
+
+**Example Configurations:**
+
+*Balanced Game:*
+- Combat NPCs: Symmetric model, Normal archetype
+- Weak NPCs: Symmetric model, Weak Grunt archetype
+
+*High Difficulty:*
+- Combat NPCs: Asymmetric model, Elite archetype
+- Weak NPCs: Symmetric model, Normal archetype
+
+*Dynamic/Adaptive NPCs:*
+- Combat NPCs: Dynamic model, Elite archetype
+- Weak NPCs: Symmetric model, Weak Grunt archetype
+
+---
+
 ## 🎯 Common Configurations
 
 ### Create a Weak Enemy (1 minute)
@@ -217,7 +260,7 @@ Use the Inspector to:
 
 ## ✅ Checklist
 
-Setup complete when:
+### Manual Setup:
 - [ ] NPCDamageController added to NPC
 - [ ] PlayerHealth added to Player
 - [ ] Player tagged as "Player"
@@ -226,6 +269,17 @@ Setup complete when:
 - [ ] Damage numbers appear in Console
 - [ ] Health bar visible in game
 - [ ] NPC attacks when in range
+
+### NPCSpawner Setup (Recommended):
+- [ ] PlayerHealth added to Player
+- [ ] Player tagged as "Player"
+- [ ] NPCSpawner exists in scene
+- [ ] "Enable Damage System" is checked on NPCSpawner
+- [ ] Damage models configured for combat/weak NPCs
+- [ ] Tested in Play Mode
+- [ ] Spawned NPCs have damage system
+- [ ] Damage numbers appear in Console
+- [ ] Health bar visible in game
 
 ---
 
