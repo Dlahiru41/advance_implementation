@@ -14132,6 +14132,7 @@ MonoBehaviour:
   enableWeaponSystem: 1
   combatNPCWeaponPrefab: {fileID: 0}
   weakNPCWeaponPrefab: {fileID: 0}
+  npcProjectilePrefab: {fileID: 100000, guid: f1e2d3c4b5a697887766554433221100, type: 3}
   terrain: {fileID: 400564553}
 --- !u!1 &1878074823
 GameObject:
