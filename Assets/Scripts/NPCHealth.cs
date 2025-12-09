@@ -15,7 +15,7 @@ namespace NPCAISystem
 
         [Tooltip("Current health of the NPC")]
         [SerializeField]
-        private float currentHealth = 50f;
+        private float currentHealth;
 
         [Header("Damage Feedback")]
         [Tooltip("Enable visual damage feedback")]
@@ -225,6 +225,15 @@ namespace NPCAISystem
             if (currentHealth <= 0f && !isDead)
             {
                 Die();
+            }
+        }
+
+        void OnDestroy()
+        {
+            // Clean up material instance to prevent memory leak
+            if (npcMaterial != null)
+            {
+                Destroy(npcMaterial);
             }
         }
     }

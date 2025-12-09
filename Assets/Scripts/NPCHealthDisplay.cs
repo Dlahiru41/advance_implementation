@@ -46,6 +46,8 @@ namespace NPCAISystem
         private Image healthBarFill;
         private Text npcIdText;
         private GameObject canvasObject;
+        private string cachedDisplayName; // Cache the display name
+        private float lastHealthPercentage = 1f; // Track last health for change detection
 
         void Start()
         {
@@ -53,6 +55,7 @@ namespace NPCAISystem
             
             if (enableDisplay)
             {
+                cachedDisplayName = GetNPCDisplayName(); // Cache name once
                 CreateHealthDisplay();
             }
         }
@@ -72,8 +75,13 @@ namespace NPCAISystem
                                               Camera.main.transform.rotation * Vector3.up);
             }
 
-            // Update health bar
-            UpdateHealthBar();
+            // Only update health bar if health changed (performance optimization)
+            float currentHealthPercentage = npcHealth.GetHealthPercentage();
+            if (Mathf.Abs(currentHealthPercentage - lastHealthPercentage) > 0.001f)
+            {
+                UpdateHealthBar();
+                lastHealthPercentage = currentHealthPercentage;
+            }
 
             // Hide display if NPC is dead
             if (npcHealth.IsDead())
@@ -168,15 +176,15 @@ namespace NPCAISystem
                 healthBarFill.color = criticalColor;
             }
 
-            // Update text with current HP
+            // Update text with current HP using cached display name
             if (npcIdText != null)
             {
-                npcIdText.text = $"{GetNPCDisplayName()}\nHP: {npcHealth.GetCurrentHealth():F0}/{npcHealth.maxHealth:F0}";
+                npcIdText.text = $"{cachedDisplayName}\nHP: {npcHealth.GetCurrentHealth():F0}/{npcHealth.maxHealth:F0}";
             }
         }
 
         /// <summary>
-        /// Get the display name for this NPC
+        /// Get the display name for this NPC (called once at start and cached)
         /// </summary>
         private string GetNPCDisplayName()
         {
@@ -187,21 +195,28 @@ namespace NPCAISystem
                 string npcType = controller.isWeakNPC ? "Weak" : "Combat";
                 // Extract number from GameObject name if it exists (e.g., "NPC_5" -> "5")
                 string name = gameObject.name;
-                string number = "";
+                
+                // Find the last sequence of digits in the name
+                int lastDigitIndex = -1;
+                int firstDigitIndex = -1;
                 for (int i = name.Length - 1; i >= 0; i--)
                 {
                     if (char.IsDigit(name[i]))
                     {
-                        number = name[i] + number;
+                        if (lastDigitIndex == -1)
+                            lastDigitIndex = i;
+                        firstDigitIndex = i;
                     }
-                    else if (number.Length > 0)
+                    else if (lastDigitIndex != -1)
                     {
+                        // Found start of digit sequence
                         break;
                     }
                 }
                 
-                if (!string.IsNullOrEmpty(number))
+                if (lastDigitIndex != -1)
                 {
+                    string number = name.Substring(firstDigitIndex, lastDigitIndex - firstDigitIndex + 1);
                     return $"{npcType} NPC #{number}";
                 }
                 return $"{npcType} NPC";
