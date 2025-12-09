@@ -1,17 +1,30 @@
 # Terrain Tutorial - Visual Enhancements & NPC AI
 
-This Unity project demonstrates procedural terrain generation with beautiful visual enhancements including textures, enhanced artifacts, improved player appearance, an advanced NPC AI system with autonomous behavior, and a Clash of Clans-style RTS camera.
+This Unity project demonstrates procedural terrain generation with beautiful visual enhancements including textures, enhanced artifacts, improved player appearance, an advanced NPC AI system with autonomous behavior, and flexible camera systems.
 
 ## Features
 
-### 📹 RTS Camera System (NEW!)
+### 📹 Camera Systems (NEW!)
+
+**Two camera modes available - choose based on your game style:**
+
+#### Player-Following Camera (NEW!)
+- **Player-Centric View**: Camera always follows the player
+- **Top-Down/Isometric**: Configurable angle for action games (Diablo, Zelda)
+- **Smooth Following**: Professional camera movement with no snapping
+- **Always Visible**: Player stays on screen at all times
+- **Easy Setup**: 5-minute setup, auto-detects player
+- **Best for**: Action RPGs, top-down shooters, adventure games
+- See `CAMERA_FOLLOW_GUIDE.md` for complete setup guide
+
+#### RTS Free-Moving Camera
 - **Free-Moving Camera**: Clash of Clans-style strategic camera
 - **Top-Down/Isometric View**: Perfect 45° angle for strategy gameplay
 - **Pan, Zoom, Rotate**: Full camera control with WASD/arrows, mouse wheel, Q/E
 - **Edge Panning**: Move mouse to screen edges for smooth panning
 - **Boundary Constraints**: Camera stays within terrain boundaries
-- **Smooth Movement**: Polished camera interpolation
 - **Never Follows Player**: True RTS experience with full map visibility
+- **Best for**: Strategy games, RTS, base building
 - See `RTS_CAMERA_GUIDE.md` for complete documentation
 
 ### 🤖 Advanced NPC AI System (NEW!)
@@ -131,13 +144,26 @@ Edit `PlayerVisualEnhancer` component:
 
 ## Controls
 
-### Camera Controls (RTS Mode)
+### Camera Controls
+
+**Choose your camera mode:**
+
+**Player-Following Camera Mode** (attach `PlayerCameraFollow` to Main Camera):
+- **Arrow Keys / WASD**: Move player (camera follows automatically)
+- **Mouse Wheel**: Zoom in/out (optional, if enabled)
+- Camera automatically follows player with smooth movement
+- See `CAMERA_FOLLOW_GUIDE.md` for setup
+
+**RTS Free-Moving Camera Mode** (attach `RTSCameraController` to Main Camera):
 - **WASD / Arrow Keys**: Pan camera
 - **Mouse Wheel**: Zoom in/out
 - **Q/E Keys**: Rotate camera
 - **Middle Mouse**: Hold and drag to rotate
 - **Mouse at screen edges**: Pan camera (edge panning)
 - **F1 key**: Show/hide camera controls help
+- See `RTS_CAMERA_GUIDE.md` for setup
+
+*Note: Only use ONE camera script at a time - either PlayerCameraFollow OR RTSCameraController*
 
 ### Gameplay Controls
 - **R key**: Regenerate terrain (in play mode)
@@ -149,7 +175,8 @@ Edit `PlayerVisualEnhancer` component:
 ## Documentation
 
 For detailed information, see:
-- `RTS_CAMERA_GUIDE.md` - **NEW!** Complete guide to RTS camera system with controls and configuration
+- `CAMERA_FOLLOW_GUIDE.md` - **NEW!** Complete guide to player-following camera with step-by-step Unity Editor instructions
+- `RTS_CAMERA_GUIDE.md` - Complete guide to RTS free-moving camera system with controls and configuration
 - `NPC_AI_SYSTEM_GUIDE.md` - **NEW!** Complete guide to NPC AI system with FSM, sensing, and formations
 - `PHASE_3_4_IMPLEMENTATION.md` - **NEW!** Complete implementation details for Phase 3 & 4
 - `ARTIFACT_SYSTEM_GUIDE.md` - **NEW!** Comprehensive artifact system user guide
