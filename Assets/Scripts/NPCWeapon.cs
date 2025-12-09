@@ -129,7 +129,7 @@ namespace NPCAISystem
             if (!enableFiring || npcController.isWeakNPC)
                 return;
 
-            // Allow firing in specific states only
+            // Allow firing in specific states only (Idle, Patrol, Chase)
             // This enables NPCs to fire at play start if player is in range
             NPCState state = npcController.currentState;
             if (state != NPCState.Idle && state != NPCState.Patrol && state != NPCState.Chase)
