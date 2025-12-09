@@ -95,6 +95,9 @@ namespace NPCAISystem
         [Tooltip("Weapon prefab for weak NPCs (optional)")]
         public GameObject weakNPCWeaponPrefab;
 
+        [Tooltip("Projectile prefab for NPC weapons (optional - will auto-create if null)")]
+        public GameObject npcProjectilePrefab;
+
         [Header("References")]
         [Tooltip("Terrain reference for height sampling")]
         public Terrain terrain;
@@ -283,6 +286,30 @@ namespace NPCAISystem
                 if (weaponPrefab != null)
                 {
                     controller.EquipWeapon(weaponPrefab);
+                }
+                else
+                {
+                    // Fallback: Add NPCWeapon component if no weapon prefab is assigned
+                    NPCWeapon npcWeapon = npcObj.AddComponent<NPCWeapon>();
+                    
+                    // Assign projectile prefab if available
+                    if (npcProjectilePrefab != null)
+                    {
+                        npcWeapon.projectilePrefab = npcProjectilePrefab;
+                    }
+                    // Otherwise NPCWeapon will create a default projectile at runtime
+                    
+                    // Configure weapon based on NPC type
+                    if (isWeak)
+                    {
+                        npcWeapon.damageModel = weakNPCDamageModel;
+                        npcWeapon.ConfigureArchetype(weakNPCArchetype);
+                    }
+                    else
+                    {
+                        npcWeapon.damageModel = combatNPCDamageModel;
+                        npcWeapon.ConfigureArchetype(combatNPCArchetype);
+                    }
                 }
             }
 
