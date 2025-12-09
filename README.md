@@ -36,6 +36,16 @@ This Unity project demonstrates procedural terrain generation with beautiful vis
 - **Easy Setup Tool**: Visual editor window at Tools → Setup NPC AI System
 - See `NPC_AI_SYSTEM_GUIDE.md` for complete documentation
 
+### 🎯 Firing Mechanics System (NEW!)
+- **Player Shooting**: Mouse-aimed projectile firing with line-of-sight validation
+- **NPC Combat AI**: Intelligent shooting integrated with FSM, predictive aiming
+- **Projectile Physics**: Physics-based projectiles with collision detection
+- **Probability-Based Damage**: Symmetric/Asymmetric damage models for variety
+- **Visual Feedback**: Muzzle flashes, projectile trails, impact effects
+- **Configurable Combat**: Adjust fire rate, accuracy, damage, and range per character
+- **Easy Setup**: 5-minute setup - add components and configure
+- See `FIRING_MECHANICS_GUIDE.md` for complete documentation
+
 ### 🎚️ Terrain and Object Scaling System (NEW!)
 - **Scale Management**: Easy-to-use system for adjusting terrain dimensions
 - **Relative Scaling**: Ensures proper scale relationship between terrain, player, and artifacts
