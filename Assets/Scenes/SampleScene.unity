@@ -13857,8 +13857,6 @@ GameObject:
   - component: {fileID: 1830117554}
   - component: {fileID: 1830117558}
   - component: {fileID: 1830117559}
-  - component: {fileID: 1830117560}
-  - component: {fileID: 1830117561}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -13978,42 +13976,6 @@ MonoBehaviour:
   glowIntensity: 0.3
   playerScale: 1
   applyScaleOnStart: 1
---- !u!114 &1830117560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830117553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a0b7fcd0ad0458183bcec05ab96a386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 10
---- !u!114 &1830117561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830117553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7c37ff3904c450cacf2cbfd92b2a2ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  enableDamageFeedback: 1
-  damageFeedbackDuration: 0.2
-  damageColor: {r: 1, g: 0, b: 0, a: 0.3}
-  enableRegeneration: 0
-  regenerationRate: 2
-  regenerationDelay: 5
-  enableRespawn: 1
-  respawnDelay: 3
-  respawnPoint: {fileID: 0}
 --- !u!1 &1878074823
 GameObject:
   m_ObjectHideFlags: 0
