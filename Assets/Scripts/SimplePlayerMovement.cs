@@ -14,6 +14,9 @@ public class SimplePlayerMovement : MonoBehaviour
     [Tooltip("Rotation speed when changing direction")]
     public float rotationSpeed = 10f;
 
+    // Constants
+    private const float GRAVITY = 9.81f; // Standard gravity acceleration (m/s²)
+
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
 
@@ -49,7 +52,7 @@ public class SimplePlayerMovement : MonoBehaviour
         // Apply gravity
         if (!characterController.isGrounded)
         {
-            moveDirection.y -= 9.81f * Time.deltaTime;
+            moveDirection.y -= GRAVITY * Time.deltaTime;
         }
 
         // Move the character

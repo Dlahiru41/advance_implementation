@@ -45,6 +45,9 @@ public class PlayerCameraFollow : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private float currentHeight;
     private Vector3 originalOffset; // Store original offset to prevent drift
+    
+    // Constants
+    private const float EPSILON = 0.001f; // Threshold for floating point comparisons
 
     void Start()
     {
@@ -115,7 +118,8 @@ public class PlayerCameraFollow : MonoBehaviour
         Vector3 lookDirection = target.position - transform.position;
         Quaternion desiredRotation = Quaternion.LookRotation(lookDirection);
 
-        // Apply rotation smoothly (frame-independent)
+        // Apply rotation smoothly (uses Slerp with Time.deltaTime for interpolation)
+        // Note: This provides frame-rate independent interpolation speed
         transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSmoothness * Time.deltaTime);
     }
 
@@ -132,7 +136,7 @@ public class PlayerCameraFollow : MonoBehaviour
 
             // Recalculate offset based on original to prevent drift
             // Prevent division by zero
-            if (Mathf.Abs(originalOffset.y) > 0.001f)
+            if (Mathf.Abs(originalOffset.y) > EPSILON)
             {
                 float heightRatio = currentHeight / originalOffset.y;
                 offset = new Vector3(
