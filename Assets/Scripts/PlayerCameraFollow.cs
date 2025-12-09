@@ -44,6 +44,7 @@ public class PlayerCameraFollow : MonoBehaviour
     // Private state
     private Vector3 velocity = Vector3.zero;
     private float currentHeight;
+    private Vector3 originalOffset; // Store original offset to prevent drift
 
     void Start()
     {
@@ -62,8 +63,9 @@ public class PlayerCameraFollow : MonoBehaviour
             }
         }
 
-        // Initialize current height from offset
+        // Initialize current height from offset and store original
         currentHeight = offset.y;
+        originalOffset = offset;
 
         // Position camera initially
         if (target != null)
@@ -114,7 +116,7 @@ public class PlayerCameraFollow : MonoBehaviour
         Quaternion desiredRotation = Quaternion.LookRotation(lookDirection);
 
         // Apply rotation smoothly
-        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSmoothness / Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSmoothness * Time.deltaTime);
     }
 
     /// <summary>
@@ -128,9 +130,13 @@ public class PlayerCameraFollow : MonoBehaviour
             currentHeight -= scroll * zoomSpeed;
             currentHeight = Mathf.Clamp(currentHeight, minHeight, maxHeight);
 
-            // Adjust forward/back offset proportionally to maintain view angle
-            float heightRatio = currentHeight / offset.y;
-            offset.z = offset.z * heightRatio;
+            // Recalculate offset based on original to prevent drift
+            float heightRatio = currentHeight / originalOffset.y;
+            offset = new Vector3(
+                originalOffset.x, 
+                currentHeight, 
+                originalOffset.z * heightRatio
+            );
         }
     }
 
