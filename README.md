@@ -33,8 +33,10 @@ This Unity project demonstrates procedural terrain generation with beautiful vis
 - **Group Formation**: Boids-style steering with Leader-Follower patterns
 - **NavMesh Integration**: Smooth pathfinding with obstacle avoidance
 - **Dynamic Behavior**: NPCs react to player presence, sounds, and environmental stimuli
+- **Health System**: NPCs have health points and can be damaged/killed by player
+- **Health Display**: Real-time HP bars above NPCs with color-coded status
 - **Easy Setup Tool**: Visual editor window at Tools → Setup NPC AI System
-- See `NPC_AI_SYSTEM_GUIDE.md` for complete documentation
+- See `NPC_AI_SYSTEM_GUIDE.md` and `NPC_HEALTH_SYSTEM_GUIDE.md` for complete documentation
 
 ### 🎯 Firing Mechanics System (NEW!)
 - **Player Shooting**: Mouse-aimed projectile firing with line-of-sight validation
@@ -43,6 +45,7 @@ This Unity project demonstrates procedural terrain generation with beautiful vis
 - **Probability-Based Damage**: Symmetric/Asymmetric damage models for variety
 - **Visual Feedback**: Muzzle flashes, projectile trails, impact effects
 - **Configurable Combat**: Adjust fire rate, accuracy, damage, and range per character
+- **NPC Damage System**: Player projectiles damage and eliminate NPCs
 - **Easy Setup**: 5-minute setup - add components and configure
 - See `FIRING_MECHANICS_GUIDE.md` for complete documentation
 
@@ -188,6 +191,8 @@ For detailed information, see:
 - `CAMERA_FOLLOW_GUIDE.md` - **NEW!** Complete guide to player-following camera with step-by-step Unity Editor instructions
 - `RTS_CAMERA_GUIDE.md` - Complete guide to RTS free-moving camera system with controls and configuration
 - `NPC_AI_SYSTEM_GUIDE.md` - **NEW!** Complete guide to NPC AI system with FSM, sensing, and formations
+- `NPC_HEALTH_SYSTEM_GUIDE.md` - **NEW!** Complete guide to NPC health, damage, and display system
+- `FIRING_MECHANICS_GUIDE.md` - Complete guide to player and NPC firing mechanics
 - `PHASE_3_4_IMPLEMENTATION.md` - **NEW!** Complete implementation details for Phase 3 & 4
 - `ARTIFACT_SYSTEM_GUIDE.md` - **NEW!** Comprehensive artifact system user guide
 - `TERRAIN_SCALING_GUIDE.md` - Complete guide to fixing oversized terrain and setting proper scale

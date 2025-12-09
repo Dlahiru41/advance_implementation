@@ -133,12 +133,18 @@ namespace NPCAISystem
             // Check if hit NPC
             if (isPlayerProjectile && collision.gameObject.GetComponent<NPCController>() != null)
             {
-                // Apply damage to NPC (would need NPC health system)
-                float damage = CalculateDamage();
-                Debug.Log($"Player projectile hit NPC for {damage:F1} damage using {damageModel} model");
+                NPCHealth npcHealth = collision.gameObject.GetComponent<NPCHealth>();
+                if (npcHealth != null)
+                {
+                    float damage = CalculateDamage();
+                    npcHealth.TakeDamage(damage, transform.position);
+                    Debug.Log($"Player projectile hit NPC for {damage:F1} damage using {damageModel} model");
+                }
+                else
+                {
+                    Debug.LogWarning($"Player projectile hit NPC {collision.gameObject.name} but it has no NPCHealth component!");
+                }
                 
-                // TODO: Apply damage to NPC when NPC health system is implemented
-                // For now, just destroy the projectile
                 Destroy(gameObject);
                 return;
             }

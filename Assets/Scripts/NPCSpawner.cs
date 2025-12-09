@@ -72,6 +72,19 @@ namespace NPCAISystem
         [Tooltip("Archetype for weak NPCs")]
         public NPCDamageController.NPCArchetype weakNPCArchetype = NPCDamageController.NPCArchetype.WeakGrunt;
 
+        [Header("Health System Configuration")]
+        [Tooltip("Enable health system for spawned NPCs")]
+        public bool enableHealthSystem = true;
+
+        [Tooltip("Max health for combat NPCs")]
+        public float combatNPCMaxHealth = 100f;
+
+        [Tooltip("Max health for weak NPCs")]
+        public float weakNPCMaxHealth = 50f;
+
+        [Tooltip("Enable health display above NPCs")]
+        public bool enableHealthDisplay = true;
+
         [Header("References")]
         [Tooltip("Terrain reference for height sampling")]
         public Terrain terrain;
@@ -212,6 +225,33 @@ namespace NPCAISystem
                     damageController.damageModel = combatNPCDamageModel;
                     damageController.archetype = combatNPCArchetype;
                 }
+            }
+
+            // Add NPCHealth if enabled
+            if (enableHealthSystem)
+            {
+                NPCHealth health = npcObj.AddComponent<NPCHealth>();
+                
+                // Configure health based on NPC type
+                if (isWeak)
+                {
+                    health.maxHealth = weakNPCMaxHealth;
+                }
+                else
+                {
+                    health.maxHealth = combatNPCMaxHealth;
+                }
+                
+                // Enable destroy on death (NPCs don't respawn by default)
+                health.destroyOnDeath = true;
+                health.enableRespawn = false;
+            }
+
+            // Add NPCHealthDisplay if enabled
+            if (enableHealthSystem && enableHealthDisplay)
+            {
+                NPCHealthDisplay healthDisplay = npcObj.AddComponent<NPCHealthDisplay>();
+                healthDisplay.enableDisplay = true;
             }
 
             // Assign to group if groups are enabled
