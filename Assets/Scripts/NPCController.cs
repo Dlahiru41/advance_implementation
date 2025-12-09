@@ -71,10 +71,18 @@ namespace NPCAISystem
         [Tooltip("Is this NPC a group leader?")]
         public bool isGroupLeader = false;
 
+        [Header("Weapon System")]
+        [Tooltip("Transform where weapon will be attached (auto-created if null)")]
+        public Transform weaponHolder;
+
+        [Tooltip("Default weapon holder offset position when auto-created")]
+        public Vector3 weaponHolderOffset = new Vector3(0.5f, 0.5f, 0f);
+
         // Components
         private NavMeshAgent agent;
         private NPCSensor sensor;
         private Transform player;
+        private GameObject equippedWeapon;
 
         // State tracking
         private float stateStartTime;
@@ -445,6 +453,50 @@ namespace NPCAISystem
         public NPCState GetCurrentState()
         {
             return _currentState;
+        }
+
+        /// <summary>
+        /// Equips a weapon prefab to the NPC
+        /// </summary>
+        /// <param name="weaponPrefab">Weapon prefab to instantiate and attach</param>
+        public void EquipWeapon(GameObject weaponPrefab)
+        {
+            if (weaponPrefab == null)
+            {
+                Debug.LogWarning($"NPCController: Cannot equip null weapon prefab on {gameObject.name}");
+                return;
+            }
+
+            // Create weapon holder if it doesn't exist
+            if (weaponHolder == null)
+            {
+                GameObject holderObj = new GameObject("WeaponHolder");
+                holderObj.transform.SetParent(transform);
+                holderObj.transform.localPosition = weaponHolderOffset;
+                holderObj.transform.localRotation = Quaternion.identity;
+                weaponHolder = holderObj.transform;
+            }
+
+            // Remove existing weapon if any
+            if (equippedWeapon != null)
+            {
+                Destroy(equippedWeapon);
+            }
+
+            // Instantiate weapon
+            equippedWeapon = Instantiate(weaponPrefab, weaponHolder.position, weaponHolder.rotation, weaponHolder);
+
+            // Initialize weapon
+            Weapon weaponScript = equippedWeapon.GetComponent<Weapon>();
+            if (weaponScript != null)
+            {
+                weaponScript.Initialize(gameObject, false); // false = not a player weapon
+                Debug.Log($"NPCController: Equipped weapon on {gameObject.name}");
+            }
+            else
+            {
+                Debug.LogWarning($"NPCController: Weapon prefab on {gameObject.name} is missing Weapon component!");
+            }
         }
 
         #endregion

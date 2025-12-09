@@ -85,6 +85,16 @@ namespace NPCAISystem
         [Tooltip("Enable health display above NPCs")]
         public bool enableHealthDisplay = true;
 
+        [Header("Weapon System Configuration")]
+        [Tooltip("Enable weapon system for spawned NPCs")]
+        public bool enableWeaponSystem = true;
+
+        [Tooltip("Weapon prefab for combat NPCs")]
+        public GameObject combatNPCWeaponPrefab;
+
+        [Tooltip("Weapon prefab for weak NPCs (optional)")]
+        public GameObject weakNPCWeaponPrefab;
+
         [Header("References")]
         [Tooltip("Terrain reference for height sampling")]
         public Terrain terrain;
@@ -252,6 +262,28 @@ namespace NPCAISystem
             {
                 NPCHealthDisplay healthDisplay = npcObj.AddComponent<NPCHealthDisplay>();
                 healthDisplay.enableDisplay = true;
+            }
+
+            // Equip weapon if enabled
+            if (enableWeaponSystem)
+            {
+                GameObject weaponPrefab = null;
+                
+                // Choose weapon based on NPC type
+                if (isWeak && weakNPCWeaponPrefab != null)
+                {
+                    weaponPrefab = weakNPCWeaponPrefab;
+                }
+                else if (!isWeak && combatNPCWeaponPrefab != null)
+                {
+                    weaponPrefab = combatNPCWeaponPrefab;
+                }
+
+                // Equip weapon if we have a prefab
+                if (weaponPrefab != null)
+                {
+                    controller.EquipWeapon(weaponPrefab);
+                }
             }
 
             // Assign to group if groups are enabled
