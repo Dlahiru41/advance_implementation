@@ -9,6 +9,9 @@ namespace NPCAISystem
     public class PlayerWeapon : MonoBehaviour
     {
         [Header("Firing Settings")]
+        [Tooltip("Enable firing (set false to disable weapon)")]
+        public bool enableFiring = true;
+
         [Tooltip("Projectile prefab to spawn when firing")]
         public GameObject projectilePrefab;
 
@@ -110,6 +113,10 @@ namespace NPCAISystem
 
         void Update()
         {
+            // Only process firing if enabled
+            if (!enableFiring)
+                return;
+
             // Check for fire input
             if (Input.GetKey(fireButton) || Input.GetKey(alternativeFireButton))
             {
