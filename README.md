@@ -1,8 +1,17 @@
-# Terrain Tutorial - Visual Enhancements
+# Terrain Tutorial - Visual Enhancements & NPC AI
 
-This Unity project demonstrates procedural terrain generation with beautiful visual enhancements including textures, enhanced artifacts, and improved player appearance.
+This Unity project demonstrates procedural terrain generation with beautiful visual enhancements including textures, enhanced artifacts, improved player appearance, and an advanced NPC AI system with autonomous behavior.
 
 ## Features
+
+### 🤖 Advanced NPC AI System (NEW!)
+- **Finite State Machine**: Idle, Patrol, Chase, Search, and Flee behaviors
+- **Sensing System**: Vision (FOV cone) and hearing detection with line-of-sight
+- **Group Formation**: Boids-style steering with Leader-Follower patterns
+- **NavMesh Integration**: Smooth pathfinding with obstacle avoidance
+- **Dynamic Behavior**: NPCs react to player presence, sounds, and environmental stimuli
+- **Easy Setup Tool**: Visual editor window at Tools → Setup NPC AI System
+- See `NPC_AI_SYSTEM_GUIDE.md` for complete documentation
 
 ### 🎚️ Terrain and Object Scaling System (NEW!)
 - **Scale Management**: Easy-to-use system for adjusting terrain dimensions
@@ -114,11 +123,14 @@ Edit `PlayerVisualEnhancer` component:
 
 - **R key**: Regenerate terrain (in play mode)
 - **P key**: Toggle artifact path visualization on/off
+- **N key**: Emit alert sound to notify NPCs (in NPC demo)
+- **H key**: Show NPC AI help and controls (in NPC demo)
 - **Fire1 button** (left mouse): Alternate terrain edit (legacy mode)
 
 ## Documentation
 
 For detailed information, see:
+- `NPC_AI_SYSTEM_GUIDE.md` - **NEW!** Complete guide to NPC AI system with FSM, sensing, and formations
 - `PHASE_3_4_IMPLEMENTATION.md` - **NEW!** Complete implementation details for Phase 3 & 4
 - `ARTIFACT_SYSTEM_GUIDE.md` - **NEW!** Comprehensive artifact system user guide
 - `TERRAIN_SCALING_GUIDE.md` - Complete guide to fixing oversized terrain and setting proper scale
