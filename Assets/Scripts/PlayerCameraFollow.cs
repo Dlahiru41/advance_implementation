@@ -24,9 +24,9 @@ public class PlayerCameraFollow : MonoBehaviour
     [Range(0.01f, 1f)]
     public float followSmoothness = 0.125f;
 
-    [Tooltip("How smoothly the camera rotates when following")]
-    [Range(0.01f, 1f)]
-    public float rotationSmoothness = 0.1f;
+    [Tooltip("Camera rotation speed (higher = faster rotation to look at player)")]
+    [Range(1f, 20f)]
+    public float rotationSmoothness = 10f;
 
     [Header("Optional: Zoom Control")]
     [Tooltip("Enable mouse wheel zoom")]
@@ -115,7 +115,7 @@ public class PlayerCameraFollow : MonoBehaviour
         Vector3 lookDirection = target.position - transform.position;
         Quaternion desiredRotation = Quaternion.LookRotation(lookDirection);
 
-        // Apply rotation smoothly
+        // Apply rotation smoothly (frame-independent)
         transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSmoothness * Time.deltaTime);
     }
 
@@ -131,12 +131,21 @@ public class PlayerCameraFollow : MonoBehaviour
             currentHeight = Mathf.Clamp(currentHeight, minHeight, maxHeight);
 
             // Recalculate offset based on original to prevent drift
-            float heightRatio = currentHeight / originalOffset.y;
-            offset = new Vector3(
-                originalOffset.x, 
-                currentHeight, 
-                originalOffset.z * heightRatio
-            );
+            // Prevent division by zero
+            if (Mathf.Abs(originalOffset.y) > 0.001f)
+            {
+                float heightRatio = currentHeight / originalOffset.y;
+                offset = new Vector3(
+                    originalOffset.x, 
+                    currentHeight, 
+                    originalOffset.z * heightRatio
+                );
+            }
+            else
+            {
+                // If original Y offset is near zero, just update height
+                offset.y = currentHeight;
+            }
         }
     }
 

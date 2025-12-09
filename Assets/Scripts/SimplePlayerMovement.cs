@@ -37,7 +37,9 @@ public class SimplePlayerMovement : MonoBehaviour
 
     void HandleMovement()
     {
-        // Get input from arrow keys or WASD (WASD may conflict with RTS camera if both are enabled)
+        // Get input from arrow keys or WASD
+        // Note: If using RTSCameraController, WASD will control the camera instead.
+        // In that case, disable RTSCameraController or use only arrow keys for player movement.
         float horizontal = Input.GetAxis("Horizontal"); // A/D or Left/Right arrows
         float vertical = Input.GetAxis("Vertical");     // W/S or Up/Down arrows
 
