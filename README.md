@@ -60,7 +60,11 @@ This Unity project demonstrates procedural terrain generation with beautiful vis
   - Traps: Rough brown cubes
 - **Material enhancements**: Metallic properties, glossiness, and emission effects
 
-### 👤 Improved Player Appearance
+### 👤 Improved Player Appearance & Movement
+- **Keyboard-based movement**: Control player with Arrow Keys or WASD
+- **Smooth rotation**: Player faces movement direction with fluid transitions
+- **CharacterController integration**: Physics-based movement with collision detection
+- **Health system**: Take damage from NPCs with visual feedback and respawn mechanics
 - Colored visual representation (blue capsule by default)
 - Optional glow effect for better visibility
 - Floating indicator above player for easy location
@@ -95,8 +99,12 @@ If your terrain is too large and takes forever to traverse:
 #### For Player:
 1. Select your Player GameObject (should be tagged "Player")
 2. Add Component → `PlayerVisualEnhancer`
-3. Use context menu "Enhance Player Visuals"
-4. Optional: Use "Add Player Indicator" for a floating marker
+3. Add Component → `SimplePlayerMovement` (enables keyboard movement)
+4. Add Component → `PlayerHealth` (enables damage system with NPCs)
+5. Use context menu "Enhance Player Visuals"
+6. Optional: Use "Add Player Indicator" for a floating marker
+
+**Note**: The Player object in the scene already has `SimplePlayerMovement` and `PlayerHealth` components attached, so you can play immediately!
 
 #### For Artifacts:
 1. Select the GameObject with `ArtifactSpawner` component
@@ -113,6 +121,8 @@ If your terrain is too large and takes forever to traverse:
   - Pathfinding visualization with toggle support (Press 'P' key)
   - Deterministic placement with optional seed
 - **`PlayerVisualEnhancer.cs`**: Improves player appearance and visibility
+- **`SimplePlayerMovement.cs`**: Keyboard-based player movement (Arrow Keys/WASD) with smooth rotation
+- **`PlayerHealth.cs`**: Player health system with damage feedback, regeneration, and respawn
 
 ### Editor Tools
 - **`VisualEnhancementSetup.cs`**: Unity Editor window for easy setup (Tools menu)
