@@ -284,10 +284,6 @@ namespace NPCAISystem
                 {
                     controller.EquipWeapon(weaponPrefab);
                 }
-                else
-                {
-                    Debug.LogWarning($"NPCSpawner: No weapon prefab assigned for {(isWeak ? "weak" : "combat")} NPC {npcObj.name}");
-                }
             }
 
             // Assign to group if groups are enabled

@@ -75,6 +75,9 @@ namespace NPCAISystem
         [Tooltip("Transform where weapon will be attached (auto-created if null)")]
         public Transform weaponHolder;
 
+        [Tooltip("Default weapon holder offset position when auto-created")]
+        public Vector3 weaponHolderOffset = new Vector3(0.5f, 0.5f, 0f);
+
         // Components
         private NavMeshAgent agent;
         private NPCSensor sensor;
@@ -469,7 +472,7 @@ namespace NPCAISystem
             {
                 GameObject holderObj = new GameObject("WeaponHolder");
                 holderObj.transform.SetParent(transform);
-                holderObj.transform.localPosition = new Vector3(0.5f, 0.5f, 0f); // Side of NPC
+                holderObj.transform.localPosition = weaponHolderOffset;
                 holderObj.transform.localRotation = Quaternion.identity;
                 weaponHolder = holderObj.transform;
             }

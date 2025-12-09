@@ -90,7 +90,7 @@ namespace NPCAISystem
                 return false;
             }
 
-            // Spawn projectile
+            // Get spawn position (muzzle is created in Initialize if null)
             Vector3 spawnPos = muzzle != null ? muzzle.position : transform.position;
             GameObject projectile = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
 
