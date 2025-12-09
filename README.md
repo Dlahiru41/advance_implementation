@@ -49,6 +49,16 @@ This Unity project demonstrates procedural terrain generation with beautiful vis
 - **Easy Setup**: 5-minute setup - add components and configure
 - See `FIRING_MECHANICS_GUIDE.md` for complete documentation
 
+### 🔫 Weapon System (NEW!)
+- **Dynamic Weapon Equipping**: NPCs can equip weapons at runtime via EquipWeapon() method
+- **Projectile & Weapon Prefabs**: Ready-to-use Projectile.prefab and Weapon.prefab
+- **Generic Weapon Component**: Weapon.cs script works for NPCs and players
+- **Automatic Assignment**: NPCSpawner automatically equips weapons to spawned NPCs
+- **Configurable Damage**: Support for Symmetric/Asymmetric/Dynamic damage models
+- **Visual Customization**: Adjustable colors, trails, muzzle flash effects
+- **Easy Integration**: Works alongside existing NPCWeapon.cs system
+- See `WEAPON_SYSTEM_GUIDE.md` and `WEAPON_SYSTEM_QUICK_START.md`
+
 ### 🎚️ Terrain and Object Scaling System (NEW!)
 - **Scale Management**: Easy-to-use system for adjusting terrain dimensions
 - **Relative Scaling**: Ensures proper scale relationship between terrain, player, and artifacts
