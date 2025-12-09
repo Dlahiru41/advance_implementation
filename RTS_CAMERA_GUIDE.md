@@ -30,7 +30,7 @@ The RTS Camera Controller provides a Clash of Clans-style free-moving camera tha
 - **Middle Mouse Button**: Hold and drag to rotate
 
 ### Help
-- **H Key**: Show/hide camera controls overlay in-game
+- **F1 Key**: Show/hide camera controls overlay in-game
 
 ## Configuration
 

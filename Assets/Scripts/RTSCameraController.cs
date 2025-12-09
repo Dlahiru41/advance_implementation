@@ -72,12 +72,14 @@ public class RTSCameraController : MonoBehaviour
     /// </summary>
     void InitializeCamera()
     {
+        // Terrain is typically assigned in Inspector, but we auto-find as fallback
+        // Note: FindObjectOfType can be expensive in large scenes - assign terrain in Inspector for best performance
         if (terrain == null)
         {
             terrain = FindObjectOfType<Terrain>();
             if (terrain == null)
             {
-                Debug.LogWarning("RTSCameraController: No terrain found. Camera boundaries may not work correctly.");
+                Debug.LogWarning("RTSCameraController: No terrain found. Camera boundaries may not work correctly. Please assign terrain in Inspector.");
             }
         }
 
@@ -119,12 +121,13 @@ public class RTSCameraController : MonoBehaviour
 
     /// <summary>
     /// Handle camera panning with WASD/Arrow keys and optional edge panning
+    /// Note: WASD keys are used for camera control in RTS games, not player movement
     /// </summary>
     void HandlePanning()
     {
         Vector3 moveDirection = Vector3.zero;
 
-        // Keyboard input
+        // Keyboard input - WASD and Arrow keys for camera panning (standard RTS controls)
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             moveDirection += Vector3.forward;
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
@@ -250,7 +253,7 @@ public class RTSCameraController : MonoBehaviour
     // Display camera controls in editor
     void OnGUI()
     {
-        if (Input.GetKey(KeyCode.H))
+        if (Input.GetKey(KeyCode.F1))
         {
             GUIStyle style = new GUIStyle(GUI.skin.box);
             style.fontSize = 14;
@@ -264,7 +267,7 @@ public class RTSCameraController : MonoBehaviour
                 "Q/E: Rotate camera\n" +
                 "Middle Mouse: Hold and drag to rotate\n" +
                 (enableEdgePan ? "Mouse at screen edges: Pan camera\n" : "") +
-                "\nPress H to hide this help";
+                "\nPress F1 to hide this help";
             
             GUI.Box(new Rect(10, 10, 350, enableEdgePan ? 200 : 180), controls, style);
         }
@@ -273,7 +276,7 @@ public class RTSCameraController : MonoBehaviour
             GUIStyle hintStyle = new GUIStyle(GUI.skin.label);
             hintStyle.fontSize = 12;
             hintStyle.normal.textColor = Color.white;
-            GUI.Label(new Rect(10, 10, 200, 30), "Press H for camera controls", hintStyle);
+            GUI.Label(new Rect(10, 10, 200, 30), "Press F1 for camera controls", hintStyle);
         }
     }
 }

@@ -137,12 +137,13 @@ Edit `PlayerVisualEnhancer` component:
 - **Q/E Keys**: Rotate camera
 - **Middle Mouse**: Hold and drag to rotate
 - **Mouse at screen edges**: Pan camera (edge panning)
-- **H key**: Show/hide camera controls help
+- **F1 key**: Show/hide camera controls help
 
 ### Gameplay Controls
 - **R key**: Regenerate terrain (in play mode)
 - **P key**: Toggle artifact path visualization on/off
 - **N key**: Emit alert sound to notify NPCs (in NPC demo)
+- **H key**: Show NPC AI help and controls (in NPC demo)
 - **Fire1 button** (left mouse): Alternate terrain edit (legacy mode)
 
 ## Documentation
