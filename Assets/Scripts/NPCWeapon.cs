@@ -83,6 +83,7 @@ namespace NPCAISystem
         public Color projectileColor = Color.red;
 
         // Internal state
+        private static readonly NPCState[] allowedFiringStates = { NPCState.Idle, NPCState.Patrol, NPCState.Chase };
         private float lastFireTime = -999f;
         private NPCController npcController;
         private NPCSensor npcSensor;
@@ -131,11 +132,7 @@ namespace NPCAISystem
 
             // Allow firing in specific states only
             // This enables NPCs to fire at play start if player is in range
-            NPCState[] allowedFiringStates = { NPCState.Idle, NPCState.Patrol, NPCState.Chase };
-            bool canFireInCurrentState = System.Array.Exists(allowedFiringStates, 
-                state => state == npcController.currentState);
-            
-            if (!canFireInCurrentState)
+            if (!System.Array.Exists(allowedFiringStates, state => state == npcController.currentState))
                 return;
 
             // Check if can fire (prevent division by zero)
