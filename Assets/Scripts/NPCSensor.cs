@@ -106,7 +106,10 @@ namespace NPCAISystem
             // Raycast from NPC eye level to target
             Vector3 rayStart = transform.position + Vector3.up * 1.5f;
             
-            if (Physics.Raycast(rayStart, direction.normalized, out RaycastHit hit, distance))
+            // Use combined mask of vision obstacles and target
+            int combinedMask = visionObstacleMask | targetMask;
+            
+            if (Physics.Raycast(rayStart, direction.normalized, out RaycastHit hit, distance, combinedMask))
             {
                 // Check if we hit the player or an obstacle
                 if (hit.transform.CompareTag("Player"))

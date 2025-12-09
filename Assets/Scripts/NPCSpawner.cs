@@ -63,6 +63,10 @@ namespace NPCAISystem
         // Spawned NPCs
         private List<GameObject> spawnedNPCs = new List<GameObject>();
         private List<NPCGroup> createdGroups = new List<NPCGroup>();
+        
+        // Shared materials for NPCs to reduce memory usage
+        private Material combatNPCMaterial;
+        private Material weakNPCMaterial;
 
         void Start()
         {
@@ -72,10 +76,31 @@ namespace NPCAISystem
                 terrain = FindObjectOfType<Terrain>();
             }
 
+            // Create shared materials
+            CreateSharedMaterials();
+
             // Spawn NPCs if in play mode
             if (Application.isPlaying)
             {
                 SpawnNPCs();
+            }
+        }
+
+        /// <summary>
+        /// Creates shared materials for NPCs to reduce memory usage
+        /// </summary>
+        private void CreateSharedMaterials()
+        {
+            if (combatNPCMaterial == null)
+            {
+                combatNPCMaterial = new Material(Shader.Find("Standard"));
+                combatNPCMaterial.color = combatNPCColor;
+            }
+
+            if (weakNPCMaterial == null)
+            {
+                weakNPCMaterial = new Material(Shader.Find("Standard"));
+                weakNPCMaterial.color = weakNPCColor;
             }
         }
 
@@ -130,13 +155,11 @@ namespace NPCAISystem
             npcObj.transform.position = position;
             npcObj.transform.localScale = Vector3.one * npcScale;
 
-            // Set color
+            // Set color using shared material
             Renderer renderer = npcObj.GetComponent<Renderer>();
             if (renderer != null)
             {
-                Material mat = new Material(Shader.Find("Standard"));
-                mat.color = isWeak ? weakNPCColor : combatNPCColor;
-                renderer.material = mat;
+                renderer.sharedMaterial = isWeak ? weakNPCMaterial : combatNPCMaterial;
             }
 
             // Add NavMeshAgent

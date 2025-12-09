@@ -18,7 +18,13 @@ namespace NPCAISystem
 
         [Header("State Configuration")]
         [Tooltip("Current state of the NPC")]
-        public NPCState currentState = NPCState.Idle;
+        [SerializeField]
+        private NPCState _currentState = NPCState.Idle;
+        
+        /// <summary>
+        /// Gets the current state of the NPC (read-only for external access)
+        /// </summary>
+        public NPCState currentState => _currentState;
 
         [Header("Idle State Settings")]
         [Tooltip("Time to remain idle before transitioning to patrol")]
@@ -116,7 +122,7 @@ namespace NPCAISystem
         void Update()
         {
             // Update current state behavior
-            switch (currentState)
+            switch (_currentState)
             {
                 case NPCState.Idle:
                     UpdateIdleState();
@@ -258,10 +264,10 @@ namespace NPCAISystem
         private void TransitionToState(NPCState newState)
         {
             // Exit current state
-            ExitState(currentState);
+            ExitState(_currentState);
 
             // Update state
-            currentState = newState;
+            _currentState = newState;
             stateStartTime = Time.time;
 
             // Enter new state
@@ -438,7 +444,7 @@ namespace NPCAISystem
         /// </summary>
         public NPCState GetCurrentState()
         {
-            return currentState;
+            return _currentState;
         }
 
         #endregion
@@ -465,27 +471,28 @@ namespace NPCAISystem
             }
 
             // Draw waypoints
-            if (patrolWaypoints != null)
+            if (patrolWaypoints != null && patrolWaypoints.Length > 0)
             {
                 Gizmos.color = Color.magenta;
                 for (int i = 0; i < patrolWaypoints.Length; i++)
                 {
-                    if (patrolWaypoints[i] != null)
+                    Transform waypoint = patrolWaypoints[i];
+                    if (waypoint == null) continue;
+                    
+                    Gizmos.DrawWireSphere(waypoint.position, 0.5f);
+                    
+                    // Draw line to next waypoint
+                    int nextIndex = (i + 1) % patrolWaypoints.Length;
+                    Transform nextWaypoint = patrolWaypoints[nextIndex];
+                    if (nextWaypoint != null)
                     {
-                        Gizmos.DrawWireSphere(patrolWaypoints[i].position, 0.5f);
-                        
-                        // Draw line to next waypoint
-                        int nextIndex = (i + 1) % patrolWaypoints.Length;
-                        if (patrolWaypoints[nextIndex] != null)
-                        {
-                            Gizmos.DrawLine(patrolWaypoints[i].position, patrolWaypoints[nextIndex].position);
-                        }
+                        Gizmos.DrawLine(waypoint.position, nextWaypoint.position);
                     }
                 }
             }
 
             // Draw search points
-            if (currentState == NPCState.Search && searchPoints != null)
+            if (_currentState == NPCState.Search && searchPoints != null)
             {
                 Gizmos.color = Color.yellow;
                 foreach (Vector3 point in searchPoints)

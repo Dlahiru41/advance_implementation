@@ -57,6 +57,10 @@ namespace NPCAISystem
         [Tooltip("Distance to check for obstacles ahead")]
         public float obstacleCheckDistance = 5f;
 
+        [Header("NavMesh Settings")]
+        [Tooltip("Distance to sample NavMesh positions")]
+        public float navMeshSampleDistance = 5f;
+
         // Formation types
         public enum FormationType
         {
@@ -141,10 +145,11 @@ namespace NPCAISystem
                 {
                     Vector3 targetPosition = npc.transform.position + steeringForce.normalized * 2f;
                     
-                    if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+                    if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, navMeshSampleDistance, NavMesh.AllAreas))
                     {
                         // Only adjust if NPC is in patrol or idle state
-                        if (npc.GetCurrentState() == NPCState.Patrol || npc.GetCurrentState() == NPCState.Idle)
+                        NPCState npcState = npc.GetCurrentState();
+                        if (npcState == NPCState.Patrol || npcState == NPCState.Idle)
                         {
                             agent.SetDestination(hit.position);
                         }
@@ -274,7 +279,7 @@ namespace NPCAISystem
                 }
 
                 // Sample on NavMesh
-                if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, navMeshSampleDistance, NavMesh.AllAreas))
                 {
                     agent.SetDestination(hit.position);
                 }
@@ -284,7 +289,7 @@ namespace NPCAISystem
                 if (separation.magnitude > 0.1f)
                 {
                     Vector3 adjustedPosition = hit.position + separation.normalized * 1f;
-                    if (NavMesh.SamplePosition(adjustedPosition, out NavMeshHit adjustedHit, 5f, NavMesh.AllAreas))
+                    if (NavMesh.SamplePosition(adjustedPosition, out NavMeshHit adjustedHit, navMeshSampleDistance, NavMesh.AllAreas))
                     {
                         agent.SetDestination(adjustedHit.position);
                     }
