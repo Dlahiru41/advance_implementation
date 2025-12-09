@@ -284,6 +284,39 @@ namespace NPCAISystem
                 {
                     controller.EquipWeapon(weaponPrefab);
                 }
+                else
+                {
+                    // Fallback: Add NPCWeapon component if no weapon prefab is assigned
+                    NPCWeapon npcWeapon = npcObj.AddComponent<NPCWeapon>();
+                    
+                    // Try to load projectile prefab from Resources or Prefabs folder
+                    GameObject projectilePrefab = Resources.Load<GameObject>("Projectile");
+                    if (projectilePrefab == null)
+                    {
+                        // Try loading from Prefabs folder
+                        projectilePrefab = UnityEngine.Object.FindObjectOfType<GameObject>();
+                        #if UNITY_EDITOR
+                        projectilePrefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Projectile.prefab");
+                        #endif
+                    }
+                    
+                    if (projectilePrefab != null)
+                    {
+                        npcWeapon.projectilePrefab = projectilePrefab;
+                    }
+                    
+                    // Configure weapon based on NPC type
+                    if (isWeak)
+                    {
+                        npcWeapon.damageModel = weakNPCDamageModel;
+                        npcWeapon.ConfigureArchetype(weakNPCArchetype);
+                    }
+                    else
+                    {
+                        npcWeapon.damageModel = combatNPCDamageModel;
+                        npcWeapon.ConfigureArchetype(combatNPCArchetype);
+                    }
+                }
             }
 
             // Assign to group if groups are enabled

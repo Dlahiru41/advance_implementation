@@ -13859,6 +13859,8 @@ GameObject:
   - component: {fileID: 1830117559}
   - component: {fileID: 1830117560}
   - component: {fileID: 1830117561}
+  - component: {fileID: 1830117562}
+  - component: {fileID: 1830117563}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -14010,6 +14012,127 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotationSpeed: 10
+--- !u!114 &1830117562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830117553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c37ff3904c450cacf2cbfd92b2a2ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  enableRespawn: 1
+  respawnDelay: 3
+  respawnPosition: {x: 100, y: 10, z: 100}
+  destroyOnDeath: 0
+--- !u!114 &1830117563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830117553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableFiring: 1
+  projectilePrefab: {fileID: 100000, guid: f1e2d3c4b5a697887766554433221100, type: 3}
+  fireRate: 2
+  maxRange: 50
+  fireButton: 323
+  alternativeFireButton: 32
+  damageModel: 0
+  minDamage: 8
+  maxDamage: 20
+  symmetricVarianceMin: 0.8
+  highDamageProbability: 0.25
+  mediumDamageProbability: 0.5
+  lowDamageMultiplier: 0.6
+  mediumDamageMultiplier: 1
+  highDamageMultiplier: 1.4
+  spawnOffset: {x: 0, y: 1, z: 0}
+  enableMuzzleFlash: 1
+  muzzleFlashDuration: 0.1
+  requireLineOfSight: 1
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!1 &1830117564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1830117565}
+  - component: {fileID: 1830117566}
+  m_Layer: 0
+  m_Name: NPCSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1830117565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830117564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100, y: 10, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1830117566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830117564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da8f89c60ae5418281fd7a5f089ceed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcCount: 5
+  weakNPCRatio: 0.3
+  spawnRadius: 30
+  minSpacingBetweenNPCs: 5
+  combatNPCColor: {r: 1, g: 0, b: 0, a: 1}
+  weakNPCColor: {r: 1, g: 0.5, b: 0, a: 1}
+  npcScale: 1
+  useGroups: 1
+  groupCount: 2
+  formationType: 0
+  visionRange: 15
+  visionAngle: 110
+  hearingRange: 20
+  enableDamageSystem: 1
+  combatNPCDamageModel: 0
+  combatNPCArchetype: 1
+  weakNPCDamageModel: 0
+  weakNPCArchetype: 0
+  enableHealthSystem: 1
+  combatNPCMaxHealth: 100
+  weakNPCMaxHealth: 50
+  enableHealthDisplay: 1
+  enableWeaponSystem: 1
+  combatNPCWeaponPrefab: {fileID: 0}
+  weakNPCWeaponPrefab: {fileID: 0}
+  terrain: {fileID: 400564553}
 --- !u!1 &1878074823
 GameObject:
   m_ObjectHideFlags: 0
