@@ -27,6 +27,9 @@ public class RTSCameraController : MonoBehaviour
     [Tooltip("Distance from screen edge to trigger panning (pixels)")]
     public float edgePanBorder = 20f;
 
+    [Tooltip("Allow camera panning with Arrow keys (disable if arrow keys are used for player)")]
+    public bool allowArrowKeyPanning = false;
+
     [Header("Zoom Settings")]
     [Tooltip("Zoom speed")]
     public float zoomSpeed = 20f;
@@ -127,14 +130,14 @@ public class RTSCameraController : MonoBehaviour
     {
         Vector3 moveDirection = Vector3.zero;
 
-        // Keyboard input - WASD and Arrow keys for camera panning (standard RTS controls)
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        // Keyboard input - WASD for camera panning; Arrow keys only if enabled
+        if (Input.GetKey(KeyCode.W) || (allowArrowKeyPanning && Input.GetKey(KeyCode.UpArrow)))
             moveDirection += Vector3.forward;
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.S) || (allowArrowKeyPanning && Input.GetKey(KeyCode.DownArrow)))
             moveDirection += Vector3.back;
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A) || (allowArrowKeyPanning && Input.GetKey(KeyCode.LeftArrow)))
             moveDirection += Vector3.left;
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D) || (allowArrowKeyPanning && Input.GetKey(KeyCode.RightArrow)))
             moveDirection += Vector3.right;
 
         // Edge panning
@@ -260,9 +263,10 @@ public class RTSCameraController : MonoBehaviour
             style.normal.textColor = Color.white;
             style.alignment = TextAnchor.UpperLeft;
             
+            string panKeys = allowArrowKeyPanning ? "WASD / Arrow Keys" : "WASD";
             string controls = 
                 "=== RTS Camera Controls ===\n\n" +
-                "WASD / Arrow Keys: Pan camera\n" +
+                $"{panKeys}: Pan camera\n" +
                 "Mouse Wheel: Zoom in/out\n" +
                 "Q/E: Rotate camera\n" +
                 "Middle Mouse: Hold and drag to rotate\n" +
