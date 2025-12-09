@@ -61,6 +61,8 @@ namespace NPCAISystem
             if (npcRenderer != null)
             {
                 // Create a unique material instance for this NPC
+                // This is intentional - each NPC needs its own material instance
+                // for independent damage feedback (color flash on hit)
                 npcMaterial = npcRenderer.material;
                 originalColor = npcMaterial.color;
             }
