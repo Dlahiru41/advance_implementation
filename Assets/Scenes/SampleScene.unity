@@ -13857,6 +13857,8 @@ GameObject:
   - component: {fileID: 1830117554}
   - component: {fileID: 1830117558}
   - component: {fileID: 1830117559}
+  - component: {fileID: 1830117560}
+  - component: {fileID: 1830117561}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -13976,6 +13978,38 @@ MonoBehaviour:
   glowIntensity: 0.3
   playerScale: 1
   applyScaleOnStart: 1
+--- !u!143 &1830117560
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830117553}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1830117561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830117553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0b7fcd0ad0458183bcec05ab96a386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  rotationSpeed: 10
 --- !u!1 &1878074823
 GameObject:
   m_ObjectHideFlags: 0
