@@ -1,3 +1,4 @@
+// csharp
 using UnityEngine;
 using UnityEditor;
 using NPCAISystem;
@@ -51,7 +52,7 @@ namespace NPCAISystemEditor
             // Group Configuration
             GUILayout.Label("Group Configuration", EditorStyles.boldLabel);
             useGroups = EditorGUILayout.Toggle("Use Groups", useGroups);
-            
+
             if (useGroups)
             {
                 groupCount = EditorGUILayout.IntSlider("Group Count", groupCount, 1, 10);
@@ -215,13 +216,13 @@ namespace NPCAISystemEditor
     /// Custom inspector for NPCController
     /// </summary>
     [CustomEditor(typeof(NPCController))]
-    public class NPCControllerEditor : Editor
+    public class NPCControllerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
-            DrawDefaultInspector();
+            base.DrawDefaultInspector();
 
-            NPCController controller = (NPCController)target;
+            NPCController controller = (NPCController)base.target;
 
             GUILayout.Space(10);
 
@@ -260,13 +261,13 @@ namespace NPCAISystemEditor
     /// Custom inspector for NPCSpawner
     /// </summary>
     [CustomEditor(typeof(NPCSpawner))]
-    public class NPCSpawnerEditor : Editor
+    public class NPCSpawnerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
-            DrawDefaultInspector();
+            base.DrawDefaultInspector();
 
-            NPCSpawner spawner = (NPCSpawner)target;
+            NPCSpawner spawner = (NPCSpawner)base.target;
 
             GUILayout.Space(10);
 
