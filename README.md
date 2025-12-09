@@ -97,14 +97,14 @@ If your terrain is too large and takes forever to traverse:
 5. Use context menu "Generate Terrain Now" or press 'R' in play mode
 
 #### For Player:
+**Note**: The included Player object already has all components configured! Follow these steps only if creating a new Player or if components are missing:
+
 1. Select your Player GameObject (should be tagged "Player")
 2. Add Component → `PlayerVisualEnhancer`
 3. Add Component → `SimplePlayerMovement` (enables keyboard movement)
 4. Add Component → `PlayerHealth` (enables damage system with NPCs)
 5. Use context menu "Enhance Player Visuals"
 6. Optional: Use "Add Player Indicator" for a floating marker
-
-**Note**: The Player object in the scene already has `SimplePlayerMovement` and `PlayerHealth` components attached, so you can play immediately!
 
 #### For Artifacts:
 1. Select the GameObject with `ArtifactSpawner` component
